@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React, { Component}from 'react';
-
-import Header from './components/Header';
+import Header from './components/base/Header';
+import Footer from './components/base/Footer'
 
 
 class App extends Component {
@@ -11,6 +11,8 @@ class App extends Component {
     return (
       <div>
         <Header/>
+        <Footer/>
+      
       </div>
     );
   }
