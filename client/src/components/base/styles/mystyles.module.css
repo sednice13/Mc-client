@@ -12,13 +12,30 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  width: 30%;
-  height: 200px;
+  width: 35%;
+  height: 260px;
   background-color: #272727;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 15px;
+}
+
+.footertextdiv {
+
+  position: fixed;
+  left: 43%;
+  transform: translateX(-46%);
+  bottom: 60px;
+  width: 70%;
+  height: 200px;
+  background-color: #ababab;
+  overflow-y: scroll;
+ 
+
+  padding-bottom: 15px;
+
+  
 }
 
 .form {
