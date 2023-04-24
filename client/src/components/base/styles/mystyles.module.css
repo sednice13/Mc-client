@@ -29,13 +29,16 @@
   bottom: 60px;
   width: 70%;
   height: 200px;
-  background-color: #ababab;
+  background-color: #272727;
   overflow-y: scroll;
  
 
   padding-bottom: 15px;
 
   
+}
+.message {
+  color: white;
 }
 
 .form {

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import mystyles from './styles/mystyles.module.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import io from 'socket.io-client'
+
+
 
 
 const socket = io.connect('http://localhost:8081')
@@ -14,9 +16,12 @@ const Footer = () => {
     message: ''
   });
 
+  const [messages, setmessages] = React.useState([])
+
   const sendMessage = () => {
 
     socket.emit('message_sent', formValue.message)
+
   }
 
 
@@ -29,34 +34,45 @@ const Footer = () => {
 
     });
 
-
   }
 
+  useEffect(() => {
+    const messageListener = (data) => {
+      console.log(data)
+
+      setmessages([...messages, data])
+    }
+
+    socket.on('message_receive', messageListener)
+    return () => {
+
+      socket.off('message_receive', messageListener);
+    }
+
+  }, [messages])
 
 
 
 
-    return(
-        <footer className={mystyles.footer}>
-         
-           <div className={mystyles.footertextdiv}> 
-             <p>Test </p>
-             <p>Test2</p>
-             <p>Test </p>
-             <p>Test2</p>
-             <p>Test </p>
-             <p>Test2</p>
-             <p>HEJ</p>
-           </div>
+
+
+  return (
+    <footer className={mystyles.footer}>
+
+      <div className={mystyles.footertextdiv}>
+        {messages.map((message, index) => (<p key={index} className={mystyles.message}>
+          {message}
+        </p>))}
+      </div>
       <Form className={mystyles.form}>
         <Form.Group className={mystyles.formgroup}>
-            <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
+          <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
         </Form.Group>
         <Button variant="success" onClick={sendMessage}>Send</Button>
       </Form>
-            
 
-        </footer>
-    )
+
+    </footer>
+  )
 }
 export default Footer

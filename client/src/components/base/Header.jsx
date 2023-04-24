@@ -12,6 +12,11 @@ const Header = () => {
         <Navbar bg="dark" variant="dark" className={mystyles.navstyle + " justify-content-center"}>
 
           <div> 
+            <h5> Registera</h5>
+            <h5> Logga in</h5>
+          </div>
+
+          <div> 
           <Container fluid>
             
             <Nav >
