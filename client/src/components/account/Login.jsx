@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import mystyles from './styles/mystyles.module.css'
-import { useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
-
-const Signin = () => {
-
-   const navigate = useNavigate()
-
-   const loginNavigate = () => {
+import { useNavigate, Navigate } from 'react-router-dom'
 
 
-      navigate('/login')
 
-   }
 
+
+
+const Login = () => {
+
+   
 
    const [formValue, setformValue] = React.useState({
       username: '',
       password: '',
-      mail: ''
+
 
    });
+   const navigate = useNavigate()
+
+   const forumNavigate = () => {
+
+
+      navigate('/forum')
+
+   }
 
    const [error, setError] = React.useState({
 
@@ -30,28 +36,38 @@ const Signin = () => {
    const handleSubmit = async (e) => {
 
 
-      e.preventDefault();
 
+
+      e.preventDefault()
+
+
+      const reqbody = {
+
+         user: formValue.username,
+
+         password: formValue.password,
+
+
+      }
 
 
       try {
 
-         console.log('testt')
-         const registerReq = await axios.post('/user/signup', {
+         const loginReq = await axios.post('/user/login', reqbody,
 
-            user: formValue.username,
-            password: formValue.password,
-            mail: formValue.mail
+            {
+               withCredentials: true,
+            })
 
+        
+         
 
-         })
+       
 
-         if (registerReq.status === 200) {
+       if (loginReq.status === 200) {
 
-            loginNavigate()
-         }
-
-
+         forumNavigate()
+      }
 
       } catch (error) {
 
@@ -64,67 +80,60 @@ const Signin = () => {
 
          }
 
-       
       }
-    
+
 
    }
 
    const handleChange = (event) => {
-      event.preventDefault();
       setformValue({
          ...formValue,
          [event.target.name]: event.target.value,
+
+
       });
 
 
    }
+
    return (
 
-      <div className={mystyles.fulldivcontent}>
-        
 
-            
+
+      
+         <div className={mystyles.divsize}>
+
+            <h1 className={mystyles.thetitle}> LOG IN</h1>
+
 
             <form className={mystyles.signinform} onSubmit={handleSubmit} >
-
-
 
                <label className={mystyles.labels}>
                   Username
                </label>
 
-               <input type='text' className={mystyles.inputs} value={formValue.username} name='username' onChange={handleChange}>
+               <input type='text' className={mystyles.inputs} name='username' onChange={handleChange}>
 
                </input>
 
-
-               <label className={mystyles.labels}>
-                  Mail Adress
-               </label>
-
-               <input type='text' className={mystyles.inputs} name="mail" onChange={handleChange}>
-
-               </input>
 
                <label className={mystyles.labels}>
                   Password
                </label>
 
-
-
                <input type='password' className={mystyles.inputs} name="password" onChange={handleChange}>
 
                </input>
                <p className={error.errortext !== null ? mystyles.error : mystyles.noerror} > {error.errortext} </p>
-               <button className={mystyles.coonectbutton}>Sign </button>
+               <button className={mystyles.coonectbutton}>log in.  </button>
 
                <p> Terms of Service</p>
 
             </form>
 
-        
-      </div>
+         </div>
+
+    
    )
 
 
@@ -132,6 +141,4 @@ const Signin = () => {
 
 
 
-
-
-export default Signin
+export default Login

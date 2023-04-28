@@ -5,6 +5,7 @@ import Header from './components/base/Header';
 import Footer from './components/base/Footer'
 
 import Signin from './components/account/Signin';
+import Login from './components/account/Login';
 
 
 class App extends Component {
@@ -13,18 +14,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header style= {{ marginBottom: '10px'} }  />
         <Router>
 
           <Routes>
        
           <Route  path='/create-account' exact element={<Signin/>} />
+          <Route  path='/login' exact element={<Login/>} />
 
           </Routes>
         </Router>
         <div>
         <h5 > <a href='/create-account'> Registera</a></h5>
-            <h5> Logga in</h5>
+            <h5> <a href='/login'> Logga in</a></h5>
         </div>
         <Footer/>
       
