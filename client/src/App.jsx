@@ -4,7 +4,7 @@ import React, { Component}from 'react';
 import Header from './components/base/Header';
 import Footer from './components/base/Footer'
 
-import Signin from './components/account/Signin';
+import Register from './components/account/Register';
 import Login from './components/account/Login';
 
 
@@ -19,7 +19,7 @@ class App extends Component {
 
           <Routes>
        
-          <Route  path='/create-account' exact element={<Signin/>} />
+          <Route  path='/create-account' exact element={<Register/>} />
           <Route  path='/login' exact element={<Login/>} />
 
           </Routes>

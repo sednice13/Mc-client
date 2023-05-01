@@ -3,7 +3,7 @@ import mystyles from './styles/mystyles.module.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Signin = () => {
+const Register = () => {
 
    const navigate = useNavigate()
 
@@ -134,4 +134,4 @@ const Signin = () => {
 
 
 
-export default Signin
+export default Register

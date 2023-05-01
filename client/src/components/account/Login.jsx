@@ -101,9 +101,9 @@ const Login = () => {
 
 
       
-         <div className={mystyles.divsize}>
+         <div className={mystyles.fulldivcontent}>
 
-            <h1 className={mystyles.thetitle}> LOG IN</h1>
+           
 
 
             <form className={mystyles.signinform} onSubmit={handleSubmit} >
