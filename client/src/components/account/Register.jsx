@@ -35,27 +35,34 @@ const Register = () => {
 
 
       try {
-
-         console.log('testt')
-         const registerReq = await axios.post('/user/signup', {
+        
+         const data = {
 
             user: formValue.username,
             password: formValue.password,
             mail: formValue.mail
-
-
-         })
-
-         if (registerReq.status === 200) {
-
-            loginNavigate()
          }
 
+         const config = {
+            headers: {
+               'Content-Type': 'application/json',
+             },
+           
+         }
+         console.log('testt')
+         const registerReq = await axios.post('http://localhost:8089/user/register', JSON.stringify(data), config)
 
+         if (registerReq.status === 201) {
+
+            console.log('sucsess')
+         }
+
+        console.log( 'req' + registerReq)
 
       } catch (error) {
-
-         if (error.response.status === 400) {
+         console.log('hello')
+         console.error( error)
+         if (error.response.status === 409) {
 
             setError({
 

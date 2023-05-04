@@ -57,13 +57,13 @@ const Footer = () => {
 
 
   return (
-    <footer className={mystyles.footer}>
+    <div  className={`${mystyles.footer} ${mystyles.footerContainer} ${mystyles.footerdiv} ${mystyles.fullWidth}`}>
 
-      <div className={mystyles.footertextdiv}>
+      
         {messages.map((message, index) => (<p key={index} className={mystyles.message}>
           {message}
         </p>))}
-      </div>
+      
       <Form className={mystyles.form}>
         <Form.Group className={mystyles.formgroup}>
           <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
@@ -72,7 +72,7 @@ const Footer = () => {
       </Form>
 
 
-    </footer>
+    </div>
   )
 }
 export default Footer

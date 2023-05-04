@@ -53,10 +53,14 @@ const Login = () => {
 
       try {
 
-         const loginReq = await axios.post('/user/login', reqbody,
+         const loginReq = await axios.post('http://localhost:8089/login', JSON.stringify(reqbody) ,
 
             {
                withCredentials: true,
+               headers: {
+                  'Content-Type': 'application/json',
+               }
+               
             })
 
         
