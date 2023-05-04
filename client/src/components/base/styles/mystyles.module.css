@@ -1,6 +1,7 @@
 .navstyle {
-  font-size: 40px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  height: 100%;
+  text-align: center;
 }
 
 .countiner {
@@ -13,27 +14,35 @@
   width: 100%;
   height: 100%;
   background-color: #201c1c;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  
  
 }
 
 .footertextdiv {
 
-  position: fixed;
-  left: 40%;
-  transform: translateX(-46%);
-  bottom: 60px;
-  width: 70%;
-  height: 200px;
+  
+  
+  width: 100%;
+  height: 85%;
   background-color: #272727;
   overflow-y: scroll;
  
 
-  padding-bottom: 15px;
+  
 
   
+}
+
+.sendingdiv {
+
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+
+
 }
  .footerContainer {
   
@@ -60,18 +69,15 @@
   margin: 0;
 }
 .form {
+  width: 50%;
+  height: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
 }
 
 .form input {
-  width: 100%;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  background-color: #343434;
+ 
 }
 
 .form button {

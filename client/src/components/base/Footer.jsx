@@ -57,13 +57,15 @@ const Footer = () => {
 
 
   return (
-    <div  className={`${mystyles.footer} ${mystyles.footerContainer} ${mystyles.footerdiv} ${mystyles.fullWidth}`}>
+    <div className={`${mystyles.footer} ${mystyles.footerContainer} ${mystyles.footerdiv} ${mystyles.fullWidth}`}>
 
-      
+      <div className={mystyles.footertextdiv}>
         {messages.map((message, index) => (<p key={index} className={mystyles.message}>
           {message}
         </p>))}
-      
+      </div>
+
+      <div className={mystyles.sendingdiv}>  
       <Form className={mystyles.form}>
         <Form.Group className={mystyles.formgroup}>
           <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
@@ -71,7 +73,7 @@ const Footer = () => {
         <Button variant="success" onClick={sendMessage}>Send</Button>
       </Form>
 
-
+      </div>
     </div>
   )
 }

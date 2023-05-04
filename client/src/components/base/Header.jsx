@@ -13,16 +13,7 @@ const Header = () => {
 
         
 
-          <div> 
-          <Container fluid>
-            
-            <Nav >
-              <Nav.Link href="#home">Hem</Nav.Link>
-              <Nav.Link href="#features">Forum</Nav.Link>
-              
-            </Nav>
-          </Container>
-          </div> 
+          
           
         </Navbar>
         
