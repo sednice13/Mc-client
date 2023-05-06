@@ -10,7 +10,7 @@ import io from 'socket.io-client'
 
 const socket = io.connect('http://localhost:8081')
 
-const Footer = () => {
+const Chat = () => {
 
   const [formValue, setformValue] = React.useState({
     message: ''
@@ -77,4 +77,4 @@ const Footer = () => {
     </div>
   )
 }
-export default Footer
+export default Chat

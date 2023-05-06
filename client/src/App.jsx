@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import React, { Component } from 'react';
 import Header from './components/base/Header';
-import Footer from './components/base/Footer'
+import Footer from './components/base/Chat'
 import { Container, Row, Col } from 'react-bootstrap';
 import Register from './components/account/Register';
 import Login from './components/account/Login';
@@ -20,7 +20,7 @@ class App extends Component {
 
           </Col>
 
-          <Col xs={5} className="bg-red">
+          <Col xs={5} className="no-margin-padding">
              <Header/>
           </Col>
         </Row>
@@ -42,9 +42,7 @@ class App extends Component {
         </Row>
         <Row className="flex-grow">
           <Col xl={7} className="bg-red h-100">
-          <h5 > <a href='/create-account'> Registera</a></h5>
-            <h5> <a href='/login'> Logga in</a></h5>
-        
+          
           </Col>
           <Col xl={5} className="bg-black h-100">
             Blå kolumn 2

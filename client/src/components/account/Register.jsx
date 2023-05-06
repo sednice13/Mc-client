@@ -2,6 +2,10 @@ import React from "react";
 import mystyles from './styles/mystyles.module.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Slide } from 'react-reveal';
+import { useState, useEffect } from "react";
+
+
 
 const Register = () => {
 
@@ -15,7 +19,7 @@ const Register = () => {
    }
 
 
-   const [formValue, setformValue] = React.useState({
+   const [formValue, setformValue] = useState({
       username: '',
       password: '',
       mail: ''
@@ -26,6 +30,16 @@ const Register = () => {
 
       errortext: null
    })
+   const [showErrorAnimation, setShowErrorAnimation] = React.useState(false)
+
+   useEffect(() => {
+      if (error.errortext) {
+         setShowErrorAnimation(true);
+      } else {
+         setShowErrorAnimation(false);
+      }
+   }, [error.errortext])
+
 
    const handleSubmit = async (e) => {
 
@@ -35,7 +49,7 @@ const Register = () => {
 
 
       try {
-        
+
          const data = {
 
             user: formValue.username,
@@ -46,8 +60,8 @@ const Register = () => {
          const config = {
             headers: {
                'Content-Type': 'application/json',
-             },
-           
+            },
+
          }
          console.log('testt')
          const registerReq = await axios.post('http://localhost:8089/user/register', JSON.stringify(data), config)
@@ -57,23 +71,23 @@ const Register = () => {
             console.log('sucsess')
          }
 
-        console.log( 'req' + registerReq)
+         console.log('req' + registerReq)
 
       } catch (error) {
          console.log('hello')
-         console.error( error)
-         if (error.response.status === 409) {
+         console.error(error)
 
-            setError({
 
-               errortext: error.response.data.error
-            })
+         setError({
 
-         }
+            errortext: error.response.data.message
+         })
 
-       
+
+
+
       }
-    
+
 
    }
 
@@ -88,10 +102,21 @@ const Register = () => {
    }
    return (
 
-      <div className={mystyles.fulldivcontent}>
-        
 
-            
+      <div className={mystyles.accountsection}>
+
+         {showErrorAnimation && (
+            <Slide right>
+               <div className={mystyles.statusdiv}>
+                  <p>{error.errortext}</p>
+               </div>
+            </Slide>
+         )}
+
+         <div className={mystyles.fulldivcontent}>
+
+
+
 
             <form className={mystyles.signinform} onSubmit={handleSubmit} >
 
@@ -123,14 +148,15 @@ const Register = () => {
                <input type='password' className={mystyles.inputs} name="password" onChange={handleChange}>
 
                </input>
-               <p className={error.errortext !== null ? mystyles.error : mystyles.noerror} > {error.errortext} </p>
+               
                <button className={mystyles.coonectbutton}>Sign </button>
 
                <p> Terms of Service</p>
 
             </form>
 
-        
+
+         </div>
       </div>
    )
 

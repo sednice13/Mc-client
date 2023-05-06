@@ -7,18 +7,19 @@ import mystyles from './styles/mystyles.module.css'
 
 const Header = () => {
 
-    return (
-        
-        <Navbar bg="dark" variant="dark" className={mystyles.navstyle + " justify-content-center"}>
+  return (
 
-        
+    <Navbar bg="dark" variant="dark" className={mystyles.navstyle + " justify-content-center"}>
 
-          
-          
-        </Navbar>
-        
-    );
-  
+
+      <h5 > <a href='/create-account'> Registera</a></h5>
+      <h5> <a href='/login'> Logga in</a></h5>
+
+
+    </Navbar>
+
+  );
+
 }
 
 export default Header
