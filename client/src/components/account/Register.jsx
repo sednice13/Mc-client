@@ -26,21 +26,14 @@ const Register = () => {
 
    });
 
-   const [error, setError] = React.useState({
+   const [status, setStatus] = React.useState({
 
-      errortext: null
+      statustext: null,
+      code: null
    })
-   const [showErrorAnimation, setShowErrorAnimation] = React.useState(false)
+   const [showShowAnimation, setShowStatusAnimation] = React.useState(false)
 
-   useEffect(() => {
-      if (error.errortext) {
-         setShowErrorAnimation(true);
-      } else {
-         setShowErrorAnimation(false);
-      }
-   }, [error.errortext])
-
-
+  
    const handleSubmit = async (e) => {
 
 
@@ -67,22 +60,38 @@ const Register = () => {
          const registerReq = await axios.post('http://localhost:8089/user/register', JSON.stringify(data), config)
 
          if (registerReq.status === 201) {
+            setStatus({
 
-            console.log('sucsess')
+               statustext: registerReq.data.message,
+               code:  registerReq.status
+            })
+
+            setShowStatusAnimation(true)
+
+            setTimeout(() => {
+               setShowStatusAnimation(false)
+            }, 5000)
+   
          }
 
-         console.log('req' + registerReq)
+         console.log(registerReq)
 
       } catch (error) {
-         console.log('hello')
+        
          console.error(error)
 
 
-         setError({
+         setStatus({
 
-            errortext: error.response.data.message
+            statustext: error.response.data.message,
+            code:  error.response.data.status
          })
 
+         setShowStatusAnimation(true)
+
+         setTimeout(() => {
+            setShowStatusAnimation(false)
+         }, 5000)
 
 
 
@@ -105,10 +114,11 @@ const Register = () => {
 
       <div className={mystyles.accountsection}>
 
-         {showErrorAnimation && (
+         {showShowAnimation && (
             <Slide right>
                <div className={mystyles.statusdiv}>
-                  <p>{error.errortext}</p>
+                  <p> {status.code} {status.statustext}</p>
+                 
                </div>
             </Slide>
          )}
