@@ -19,14 +19,9 @@ const Login = () => {
 
 
    });
-   const navigate = useNavigate()
+  
 
-   const forumNavigate = () => {
-
-
-      navigate('/forum')
-
-   }
+  
 
    const [error, setError] = React.useState({
 
@@ -56,7 +51,7 @@ const Login = () => {
          const loginReq = await axios.post('http://localhost:8089/login', JSON.stringify(reqbody) ,
 
             {
-               withCredentials: true,
+              
                headers: {
                   'Content-Type': 'application/json',
                }
@@ -70,19 +65,19 @@ const Login = () => {
 
        if (loginReq.status === 200) {
 
-         forumNavigate()
+         
       }
 
       } catch (error) {
 
-         if (error.response.status === 400) {
+       
 
             setError({
 
                errortext: error.response.data.error
             })
 
-         }
+         
 
       }
 

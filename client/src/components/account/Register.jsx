@@ -1,6 +1,6 @@
 import React from "react";
 import mystyles from './styles/mystyles.module.css'
-import { useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 import { Slide } from 'react-reveal';
 import { useState, useEffect } from "react";
@@ -9,14 +9,7 @@ import { useState, useEffect } from "react";
 
 const Register = () => {
 
-   const navigate = useNavigate()
-
-   const loginNavigate = () => {
-
-
-      navigate('/login')
-
-   }
+   
 
 
    const [formValue, setformValue] = useState({
@@ -31,9 +24,9 @@ const Register = () => {
       statustext: null,
       code: null
    })
-   const [showShowAnimation, setShowStatusAnimation] = React.useState(false)
+   const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
 
-  
+
    const handleSubmit = async (e) => {
 
 
@@ -56,14 +49,14 @@ const Register = () => {
             },
 
          }
-         console.log('testt')
+        
          const registerReq = await axios.post('http://localhost:8089/user/register', JSON.stringify(data), config)
 
          if (registerReq.status === 201) {
             setStatus({
 
                statustext: registerReq.data.message,
-               code:  registerReq.status
+               code: registerReq.status
             })
 
             setShowStatusAnimation(true)
@@ -71,20 +64,19 @@ const Register = () => {
             setTimeout(() => {
                setShowStatusAnimation(false)
             }, 5000)
-   
+
          }
 
-         console.log(registerReq)
+       
 
       } catch (error) {
-        
-         console.error(error)
 
+         
 
          setStatus({
 
             statustext: error.response.data.message,
-            code:  error.response.data.status
+            code: error.response.data.status
          })
 
          setShowStatusAnimation(true)
@@ -114,11 +106,13 @@ const Register = () => {
 
       <div className={mystyles.accountsection}>
 
-         {showShowAnimation && (
+         {showStatusAnimation && (
             <Slide right>
-               <div className={mystyles.statusdiv}>
+               <div className={mystyles.statusdiv} style={{
+                  backgroundColor: status.code === 201 ? 'green' : 'red',
+               }}>
                   <p> {status.code} {status.statustext}</p>
-                 
+
                </div>
             </Slide>
          )}
@@ -158,7 +152,7 @@ const Register = () => {
                <input type='password' className={mystyles.inputs} name="password" onChange={handleChange}>
 
                </input>
-               
+
                <button className={mystyles.coonectbutton}>Sign </button>
 
                <p> Terms of Service</p>
