@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import mystyles from './styles/mystyles.module.css'
+import { Slide } from 'react-reveal';
+import {AuthContext} from './Authcontext'
 
 import axios from 'axios'
-import { useNavigate, Navigate } from 'react-router-dom'
+
 
 
 
@@ -19,14 +21,18 @@ const Login = () => {
 
 
    });
-  
+   
+   const [status, setStatus] = React.useState({
 
-  
-
-   const [error, setError] = React.useState({
-
-      errortext: null
+      statustext: null,
+      code: null
    })
+   const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
+   const [auth, setAuth] = useContext(AuthContext)
+
+  
+
+   
 
    const handleSubmit = async (e) => {
 
@@ -48,7 +54,7 @@ const Login = () => {
 
       try {
 
-         const loginReq = await axios.post('http://localhost:8089/login', JSON.stringify(reqbody) ,
+         const loginReq = await axios.post('http://localhost:8089/user/login', JSON.stringify(reqbody) ,
 
             {
               
@@ -63,19 +69,48 @@ const Login = () => {
 
        
 
-       if (loginReq.status === 200) {
+       if (loginReq.status === 201) {
+
+
+
+         console.log(loginReq)
+          
+         setAuth({
+            jwt: loginReq.data.accsess_token,
+            username: reqbody.user,
+          })
+         setStatus({
+
+            statustext: loginReq.data.message,
+            code: loginReq.status
+         })
+
+         setShowStatusAnimation(true)
+
+         setTimeout(() => {
+            setShowStatusAnimation(false)
+         }, 5000)
+
 
          
       }
 
       } catch (error) {
-
+         
+         console.log(error)
        
 
-            setError({
+         setStatus({
 
-               errortext: error.response.data.error
-            })
+            statustext: error.data.message,
+            code: error.status
+         })
+
+         setShowStatusAnimation(true)
+
+         setTimeout(() => {
+            setShowStatusAnimation(false)
+         }, 5000)
 
          
 
@@ -97,7 +132,18 @@ const Login = () => {
 
    return (
 
+      <div className={mystyles.accountsection}>
 
+         {showStatusAnimation && (
+            <Slide right>
+               <div className={mystyles.statusdiv} style={{
+                  backgroundColor: status.code === 201 ? 'green' : 'red',
+               }}>
+                  <p> {status.code} {status.statustext}</p>
+
+               </div>
+            </Slide>
+         )}
 
       
          <div className={mystyles.fulldivcontent}>
@@ -123,13 +169,14 @@ const Login = () => {
                <input type='password' className={mystyles.inputs} name="password" onChange={handleChange}>
 
                </input>
-               <p className={error.errortext !== null ? mystyles.error : mystyles.noerror} > {error.errortext} </p>
+               
                <button className={mystyles.coonectbutton}>log in.  </button>
 
                <p> Terms of Service</p>
 
             </form>
 
+         </div>
          </div>
 
     

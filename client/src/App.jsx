@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import React, { Component } from 'react';
 import Header from './components/base/Header';
 import Footer from './components/base/Chat'
+import { AuthProvider } from './components/account/Authcontext';
 import { Container, Row, Col } from 'react-bootstrap';
 import Register from './components/account/Register';
 import Login from './components/account/Login';
@@ -14,6 +15,7 @@ class App extends Component {
 
   render() {
     return (
+      <AuthProvider> 
       <Container fluid className="container-full-height d-flex flex-column">
         <Row className='notmainHegiht'>
           <Col xl={7} className="bg-red">
@@ -54,6 +56,7 @@ class App extends Component {
           </Col>
         </Row>
       </Container>
+      </AuthProvider>
     );
   }
 }
