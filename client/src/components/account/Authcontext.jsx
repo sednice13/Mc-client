@@ -8,7 +8,7 @@ export const AuthProvider = props => {
 
     const [auth, setAuth] = useState({
 
-        username: undefined,
+        user: undefined,
         jwt: undefined
 
 

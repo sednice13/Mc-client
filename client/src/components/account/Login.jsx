@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import mystyles from './styles/mystyles.module.css'
 import { Slide } from 'react-reveal';
 import {AuthContext} from './Authcontext'
+import jwtDecode from 'jwt-decode'
+
+
 
 import axios from 'axios'
 
@@ -73,11 +76,12 @@ const Login = () => {
 
 
 
-         console.log(loginReq)
+
+        
           
          setAuth({
             jwt: loginReq.data.accsess_token,
-            username: reqbody.user,
+            user: jwtDecode(loginReq.data.accsess_token),
           })
          setStatus({
 
@@ -97,7 +101,7 @@ const Login = () => {
 
       } catch (error) {
          
-         console.log(error)
+         
        
 
          setStatus({
