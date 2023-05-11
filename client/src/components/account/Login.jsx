@@ -31,7 +31,7 @@ const Login = () => {
       code: null
    })
    const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
-   const [auth, setAuth] = useContext(AuthContext)
+   const { auth, setAuth } = useContext(AuthContext);
 
   
 
@@ -75,14 +75,15 @@ const Login = () => {
        if (loginReq.status === 201) {
 
 
-
-
-        
-          
-         setAuth({
+          const result = {
+           
             jwt: loginReq.data.accsess_token,
-            user: jwtDecode(loginReq.data.accsess_token),
-          })
+            user: jwtDecode(loginReq.data.accsess_token)
+          }
+     
+         setAuth(result)
+          
+      
          setStatus({
 
             statustext: loginReq.data.message,
