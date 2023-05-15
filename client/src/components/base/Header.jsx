@@ -7,33 +7,36 @@ import { AuthContext } from '../account/Authcontext'
 import { useContext } from "react";
 
 const Header = () => {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   const logauth = () => {
     console.log('Auth logging')
+    
     console.log(auth)
   }
 
   return (
     <Navbar bg="dark" variant="dark" className={mystyles.navstyle + " justify-content-center"}>
       { auth.user && auth.user.sub 
-        ? (
+        ? 
           <>
-            
-            <h5>Logga ut</h5>
+            <h5 className={mystyles.impactWhite}> {auth.user.sub}</h5>
+            <h5 className={mystyles.impactWhite}>Logga ut</h5>
           </>
-        ) 
+         
         : (
           <>
-            <h5><a href='/create-account'>Registera</a></h5>
-            <h5><a href='/login'>Logga in</a></h5>
+          
+            <h5><a href='/create-account' className={mystyles.impactWhite}>Registera</a></h5>
+            <h5><a href='/login' className={mystyles.impactWhite}>Logga in</a></h5>
+            
           </>
 
          
         )
       }
-       <button onClick={logauth}></button>
       
+     <button onClick={logauth}> Log auth </button>
     </Navbar>
   );
 }

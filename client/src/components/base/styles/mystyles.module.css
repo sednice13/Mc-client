@@ -32,6 +32,12 @@
 
   
 }
+.impactWhite {
+  color: white;
+  text-decoration: none;
+  font-family: Impact,  sans-serif;
+  margin: 10px;
+}
 
 .sendingdiv {
 

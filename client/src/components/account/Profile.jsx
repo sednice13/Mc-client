@@ -13,13 +13,13 @@ import {AuthContext} from './Authcontext'
 
 
 
-const Login = () => {
+const Profile = () => {
 
    
 
    const [formValue, setformValue] = React.useState({
-      username: '',
-      password: '',
+      mcname: '',
+      
 
 
    });
@@ -30,7 +30,7 @@ const Login = () => {
       code: null
    })
    const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
-   const { login } = useContext(AuthContext);
+   const { connectToMinecraft } = useContext(AuthContext);
 
   
 
@@ -42,7 +42,7 @@ const Login = () => {
 
       try {
          e.preventDefault()
-         const response = await login(formValue.username, formValue.password)
+         const response = await connectToMinecraft(formValue.mcname)
       
          setStatus({
 
@@ -116,26 +116,14 @@ const Login = () => {
             <form className={mystyles.signinform} onSubmit={handleSubmit} >
 
                <label className={mystyles.labels}>
-                  Username
+                  Minecraft name
                </label>
 
-               <input type='text' className={mystyles.inputs} name='username' onChange={handleChange}>
+               <input type='text' className={mystyles.inputs} name='mcname' onChange={handleChange}>
 
                </input>
 
-
-               <label className={mystyles.labels}>
-                  Password
-               </label>
-
-               <input type='password' className={mystyles.inputs} name="password" onChange={handleChange}>
-
-               </input>
-               
-               <button className={mystyles.coonectbutton}>log in.  </button>
-
-               <p> Terms of Service</p>
-
+               <button className={mystyles.coonectbutton}>connect.  </button>
             </form>
 
          </div>
@@ -149,4 +137,4 @@ const Login = () => {
 
 
 
-export default Login
+export default Profile

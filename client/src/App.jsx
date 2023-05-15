@@ -7,6 +7,7 @@ import { AuthProvider } from './components/account/Authcontext';
 import { Container, Row, Col } from 'react-bootstrap';
 import Register from './components/account/Register';
 import Login from './components/account/Login';
+import Profile from './components/account/Profile';
 import './App.css';
 
 
@@ -34,6 +35,8 @@ class App extends Component {
             <Router>
 
               <Routes>
+
+              <Route path='/' exact element={<Profile />} />
 
                 <Route path='/create-account' exact element={<Register />} />
                 <Route path='/login' exact element={<Login />} />
