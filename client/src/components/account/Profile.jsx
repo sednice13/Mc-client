@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import mystyles from './styles/mystyles.module.css'
 import { Slide } from 'react-reveal';
-import {AuthContext} from './Authcontext'
+import { AuthContext } from './Authcontext'
+import PlayerHead from "./Playerhead";
 
 
 
@@ -15,15 +16,15 @@ import {AuthContext} from './Authcontext'
 
 const Profile = () => {
 
-   
+   const { auth } = useContext(AuthContext);
 
    const [formValue, setformValue] = React.useState({
       mcname: '',
-      
+
 
 
    });
-   
+
    const [status, setStatus] = React.useState({
 
       statustext: null,
@@ -32,9 +33,9 @@ const Profile = () => {
    const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
    const { connectToMinecraft } = useContext(AuthContext);
 
-  
 
-   
+
+
 
    const handleSubmit = async (e) => {
 
@@ -43,7 +44,7 @@ const Profile = () => {
       try {
          e.preventDefault()
          const response = await connectToMinecraft(formValue.mcname)
-      
+
          setStatus({
 
             statustext: response.data.message,
@@ -57,11 +58,11 @@ const Profile = () => {
          }, 5000)
 
 
-         
+
       }
 
-       catch (error) {
-         
+      catch (error) {
+
          setStatus({
 
             statustext: error.response.data.message,
@@ -74,12 +75,12 @@ const Profile = () => {
             setShowStatusAnimation(false)
          }, 5000)
 
-         
+
 
       }
 
    }
-   
+
 
    const handleChange = (event) => {
       setformValue({
@@ -107,29 +108,44 @@ const Profile = () => {
             </Slide>
          )}
 
-      
+
          <div className={mystyles.fulldivcontent}>
 
-           
+            {auth.user && auth.user.sub
+               ?
+               <>
+                  <PlayerHead username={auth.user.mcname}/>
+               </>
+
+               : (
+                  <>
+
+                     <form className={mystyles.signinform} onSubmit={handleSubmit} >
+
+                        <label className={mystyles.labels}>
+                           Minecraft name
+                        </label>
+
+                        <input type='text' className={mystyles.inputs} name='mcname' onChange={handleChange}>
+
+                        </input>
+
+                        <button className={mystyles.coonectbutton}>connect.  </button>
+                     </form>
+
+                  </>
 
 
-            <form className={mystyles.signinform} onSubmit={handleSubmit} >
+               )
+            }
 
-               <label className={mystyles.labels}>
-                  Minecraft name
-               </label>
 
-               <input type='text' className={mystyles.inputs} name='mcname' onChange={handleChange}>
 
-               </input>
-
-               <button className={mystyles.coonectbutton}>connect.  </button>
-            </form>
 
          </div>
-         </div>
+      </div>
 
-    
+
    )
 
 
