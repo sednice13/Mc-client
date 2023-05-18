@@ -20,7 +20,18 @@ const Chat = () => {
 
   const sendMessage = () => {
 
-    socket.emit('message_sent', formValue.message)
+   if(localStorage.getItem('token')) {
+
+    const socketinfo = {
+      message: formValue.message,
+      token: localStorage.getItem('token')
+    }
+    
+    socket.emit('message_sent', socketinfo)
+
+   }
+
+   
 
   }
 

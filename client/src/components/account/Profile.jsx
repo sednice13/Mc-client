@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect} from "react";
 import mystyles from './styles/mystyles.module.css'
 import { Slide } from 'react-reveal';
 import { AuthContext } from './Authcontext'
@@ -16,14 +16,24 @@ import PlayerHead from "./Playerhead";
 
 const Profile = () => {
 
-   const { auth } = useContext(AuthContext);
+   const { auth } = useContext(AuthContext)
+   const [loading, setLoading] = useState(true)
+
+   useEffect(() => {
+      
+      const timer = setTimeout(() => {
+         setLoading(false)
+      }, 10) 
+
+      return () => clearTimeout(timer);
+   }, [])
 
    const [formValue, setformValue] = React.useState({
       mcname: '',
 
 
 
-   });
+   })
 
    const [status, setStatus] = React.useState({
 
@@ -31,7 +41,7 @@ const Profile = () => {
       code: null
    })
    const [showStatusAnimation, setShowStatusAnimation] = React.useState(false)
-   const { connectToMinecraft } = useContext(AuthContext);
+   const { connectToMinecraft } = useContext(AuthContext)
 
 
 
@@ -91,6 +101,10 @@ const Profile = () => {
       });
 
 
+   }
+
+   if (loading) {
+      return <div>Loading...</div>
    }
 
    return (
