@@ -19,19 +19,19 @@ class App extends Component {
       <AuthProvider> 
       <Container fluid className="container-full-height d-flex flex-column">
         <Row className='notmainHegiht'>
-          <Col xl={7} className="bg-red">
+          <Col xl={7} sm={8} className="bg-red">
 
           </Col>
 
-          <Col xs={5} className="no-margin-padding">
+          <Col xl={5}  sm={4} className="no-margin-padding">
              <Header/>
           </Col>
         </Row>
         <Row className="flex-grow" noGutters>
-          <Col xl={7} className="no-margin-padding" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <Col xl={7} sm={8} className="no-margin-padding" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <Footer />
           </Col>
-          <Col xl={5} className="no-margin-padding">
+          <Col xl={5} sm={4} className="no-margin-padding">
             <Router>
 
               <Routes>

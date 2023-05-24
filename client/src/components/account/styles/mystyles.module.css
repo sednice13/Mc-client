@@ -88,3 +88,32 @@ a {
   right: 3px;
   background-color: rgb(211, 68, 68);
 }
+.minecraftprofile {
+color: rgb(111, 75, 75);
+border-radius: 25px;
+height: 50%;
+width: 50%;
+border: 3px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+}
+.legends {
+  display: contents;
+}
+.divtext {
+
+  text-align: center;
+  height: 50%;
+  width: 100%;
+  color: white
+}
+.divskin {
+
+
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}

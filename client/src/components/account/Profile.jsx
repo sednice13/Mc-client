@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import mystyles from './styles/mystyles.module.css'
 import { Slide } from 'react-reveal';
 import { AuthContext } from './Authcontext'
@@ -20,10 +20,10 @@ const Profile = () => {
    const [loading, setLoading] = useState(true)
 
    useEffect(() => {
-      
+
       const timer = setTimeout(() => {
          setLoading(false)
-      }, 10) 
+      }, 10)
 
       return () => clearTimeout(timer);
    }, [])
@@ -125,16 +125,30 @@ const Profile = () => {
 
          <div className={mystyles.fulldivcontent}>
 
-            {auth.user && auth.user.sub
+            {auth.user && auth.user.mcname
                ?
-               <>
-                  <PlayerHead username={auth.user.mcname}/>
+               <>  
+                  
+                   <fieldset className={mystyles.minecraftprofile}>  
+                     <div className={mystyles.divtext}>  
+                     <p>Minecraft name: {auth.user.mcname}</p>
+                     <p>Webname: {auth.user.sub}</p>
+                     <p>Mail: {auth.user.mail}</p>
+                     </div>
+                     <div className={mystyles.divskin}> 
+                   <PlayerHead username={auth.user.mcname} />
+                   </div>
+                   </fieldset>
+                   
+                   
+                   
+                 
                </>
 
                : (
                   <>
 
-                     <form className={mystyles.signinform} onSubmit={handleSubmit} >
+                     {auth.user && auth.user.sub ? <>  <form className={mystyles.signinform} onSubmit={handleSubmit} >
 
                         <label className={mystyles.labels}>
                            Minecraft name
@@ -145,7 +159,11 @@ const Profile = () => {
                         </input>
 
                         <button className={mystyles.coonectbutton}>connect.  </button>
-                     </form>
+                     </form>  </> : (<>
+                     <h3> LOGGA IN</h3>
+                     </>)}
+
+
 
                   </>
 

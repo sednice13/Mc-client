@@ -9,11 +9,7 @@ import { useContext } from "react";
 const Header = () => {
   const { auth } = useContext(AuthContext);
 
-  const logauth = () => {
-    console.log('Auth logging')
-    
-    console.log(auth)
-  }
+  
 
   return (
     <Navbar bg="dark" variant="dark" className={mystyles.navstyle + " justify-content-center"}>
@@ -36,7 +32,7 @@ const Header = () => {
         )
       }
       
-     <button onClick={logauth}> Log auth </button>
+
     </Navbar>
   );
 }

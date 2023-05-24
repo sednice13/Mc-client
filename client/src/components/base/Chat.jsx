@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import mystyles from './styles/mystyles.module.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import io from 'socket.io-client'
+import { AuthContext } from '../account/Authcontext';
 
 
 
@@ -12,11 +13,16 @@ const socket = io.connect('http://localhost:8081')
 
 const Chat = () => {
 
+const { auth } = useContext(AuthContext)
   const [formValue, setformValue] = React.useState({
     message: ''
   });
 
   const [messages, setmessages] = React.useState([])
+
+  
+
+
 
   const sendMessage = () => {
 
@@ -30,7 +36,10 @@ const Chat = () => {
     socket.emit('message_sent', socketinfo)
 
    }
+  else {
+    setmessages([...messages, 'Your account are not logged in? Try log in.'])
 
+  }
    
 
   }
@@ -69,8 +78,10 @@ const Chat = () => {
 
   return (
     <div className={`${mystyles.footer} ${mystyles.footerContainer} ${mystyles.footerdiv} ${mystyles.fullWidth}`}>
+      
 
       <div className={mystyles.footertextdiv}>
+        
         {messages.map((message, index) => (<p key={index} className={mystyles.message}>
           {message}
         </p>))}
@@ -80,11 +91,14 @@ const Chat = () => {
       <Form className={mystyles.form}>
         <Form.Group className={mystyles.formgroup}>
           <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
+          
         </Form.Group>
         <Button variant="success" onClick={sendMessage}>Send</Button>
       </Form>
+      
 
       </div>
+      
     </div>
   )
 }
