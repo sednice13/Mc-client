@@ -69,6 +69,14 @@ export const AuthProvider = props => {
         }
 
     }
+    const LogOut =  () => {
+
+        localStorage.removeItem('token')
+        
+        setAuth({})
+
+        return true
+    }
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -83,7 +91,7 @@ export const AuthProvider = props => {
 
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, login, connectToMinecraft}}>
+        <AuthContext.Provider value={{auth, setAuth, login, connectToMinecraft, LogOut}}>
             {props.children}
         </AuthContext.Provider>
     )

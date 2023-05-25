@@ -7,7 +7,12 @@ import { AuthContext } from '../account/Authcontext'
 import { useContext } from "react";
 
 const Header = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth, LogOut } = useContext(AuthContext);
+
+  const handleLogOut = async () => {
+    LogOut()
+    
+  }
 
   
 
@@ -17,7 +22,7 @@ const Header = () => {
         ? 
           <>
             <h5 className={mystyles.impactWhite}> {auth.user.sub}</h5>
-            <h5 className={mystyles.impactWhite}>Logga ut</h5>
+            <h5 className={mystyles.impactWhite} onClick={handleLogOut}>Logga ut</h5>
           </>
          
         : (
