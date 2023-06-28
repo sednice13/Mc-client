@@ -1,0 +1,62 @@
+
+
+.App-link {
+  color: #61dafb;
+}
+.bg-red {
+  background-color: rgb(150, 30, 30);
+}
+
+.bg-gray {
+  background-color: gray;
+}
+.bg-black {
+  background-color: black;
+}
+.bg-blue {
+  background-color: #7b5151;
+  
+}
+.no-padding {
+  padding: 0;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  height: 100%;
+  width: 100%;
+}
+.container-full-height {
+  height: 100vh;
+}
+
+.no-margin-padding {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.relative-container {
+  position: relative;
+  height: 100%;
+}
+
+.notmainHegiht {
+  height: 50px;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
