@@ -2,7 +2,7 @@ import React from "react";
 import mystyles from './styles/mystyles.module.css'
 
 import axios from 'axios'
-import { Slide } from 'react-reveal';
+import { Slide } from 'react-awesome-reveal';
 import { useState, useEffect } from "react";
 
 

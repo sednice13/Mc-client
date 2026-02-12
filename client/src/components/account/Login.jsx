@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import mystyles from './styles/mystyles.module.css'
-import { Slide } from 'react-reveal';
+import { Slide } from 'react-awesome-reveal';
 import {AuthContext} from './Authcontext'
 
 

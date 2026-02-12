@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import mystyles from './styles/mystyles.module.css'
-import { Slide } from 'react-reveal';
+import { Slide } from 'react-awesome-reveal';
 import { AuthContext } from './Authcontext'
 import PlayerHead from "./Playerhead";
 
@@ -30,6 +30,7 @@ const Profile = () => {
 
    const [formValue, setformValue] = React.useState({
       mcname: '',
+      verifyCode: ''
 
 
 
@@ -53,7 +54,7 @@ const Profile = () => {
 
       try {
          e.preventDefault()
-         const response = await connectToMinecraft(formValue.mcname)
+         const response = await connectToMinecraft(formValue.mcname, formValue.verifyCode)
 
          setStatus({
 
@@ -155,6 +156,14 @@ const Profile = () => {
                         </label>
 
                         <input type='text' className={mystyles.inputs} name='mcname' onChange={handleChange}>
+
+                        </input>
+
+                        <label className={mystyles.labels}>
+                           Verify code
+                        </label>
+
+                        <input type='text' className={mystyles.inputs} name='verifyCode' onChange={handleChange}>
 
                         </input>
 

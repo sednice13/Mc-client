@@ -36,10 +36,11 @@ export const AuthProvider = props => {
         }
     }
 
-    const connectToMinecraft = async (mcname) => {
+    const connectToMinecraft = async (mcname, verifyCode) => {
 
         const reqbody = {
             username: mcname,
+            verifyCode: verifyCode,
             token: localStorage.getItem('token'),
             sub: auth.user.sub
            

@@ -9,7 +9,7 @@ import { AuthContext } from '../account/Authcontext';
 
 
 
-const socket = io.connect('http://localhost:8081')
+const socket = io.connect('http://localhost:9308')
 
 const Chat = () => {
 
