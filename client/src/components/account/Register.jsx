@@ -4,6 +4,7 @@ import mystyles from './styles/mystyles.module.css'
 import axios from 'axios'
 import { Slide } from 'react-awesome-reveal';
 import { useState, useEffect } from "react";
+import { AUTH_BASE_URL } from '../../config/endpoints'
 
 
 
@@ -50,7 +51,7 @@ const Register = () => {
 
          }
         
-         const registerReq = await axios.post('http://localhost:8089/user/register', JSON.stringify(data), config)
+         const registerReq = await axios.post(`${AUTH_BASE_URL}/user/register`, JSON.stringify(data), config)
 
          if (registerReq.status === 201) {
             setStatus({

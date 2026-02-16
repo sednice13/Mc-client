@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect} from "react";
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import { AUTH_BASE_URL } from '../../config/endpoints'
 
 export const AuthContext = createContext()
 
@@ -14,7 +15,7 @@ export const AuthProvider = props => {
         }
 
         try {
-            const loginReq = await axios.post('http://localhost:8089/user/login', JSON.stringify(reqbody), {
+            const loginReq = await axios.post(`${AUTH_BASE_URL}/user/login`, JSON.stringify(reqbody), {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -47,9 +48,10 @@ export const AuthProvider = props => {
         }
 
         try {
-            const loginReq = await axios.post('http://localhost:8089/user/mcconnect', JSON.stringify(reqbody), {
+            const loginReq = await axios.post(`${AUTH_BASE_URL}/user/mcconnect`, JSON.stringify(reqbody), {
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             })
             

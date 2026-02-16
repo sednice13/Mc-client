@@ -1,19 +1,18 @@
-import React, { useEffect, useContext } from 'react'
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useEffect } from 'react'
 import mystyles from './styles/mystyles.module.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import io from 'socket.io-client'
-import { AuthContext } from '../account/Authcontext';
+import { Fade, Slide } from 'react-awesome-reveal';
+import { MC_SOCKET_URL } from '../../config/endpoints'
 
 
 
 
-const socket = io.connect('http://localhost:9308')
+const socket = io(MC_SOCKET_URL, { path: '/socket.io' })
 
 const Chat = () => {
 
-const { auth } = useContext(AuthContext)
   const [formValue, setformValue] = React.useState({
     message: ''
   });
@@ -26,7 +25,11 @@ const { auth } = useContext(AuthContext)
 
   const sendMessage = () => {
 
-   if(localStorage.getItem('token')) {
+    if (formValue.message.trim().length === 0) {
+      return
+    }
+
+    if(localStorage.getItem('token')) {
 
     const socketinfo = {
       message: formValue.message,
@@ -34,6 +37,7 @@ const { auth } = useContext(AuthContext)
     }
     
     socket.emit('message_sent', socketinfo)
+    setformValue({ message: '' })
 
    }
   else {
@@ -59,8 +63,7 @@ const { auth } = useContext(AuthContext)
   useEffect(() => {
     const messageListener = (data) => {
       console.log(data)
-
-      setmessages([...messages, data])
+      setmessages((prev) => [...prev, data])
     }
 
     socket.on('message_receive', messageListener)
@@ -69,7 +72,7 @@ const { auth } = useContext(AuthContext)
       socket.off('message_receive', messageListener);
     }
 
-  }, [messages])
+  }, [])
 
 
 
@@ -77,28 +80,51 @@ const { auth } = useContext(AuthContext)
 
 
   return (
-    <div className={`${mystyles.footer} ${mystyles.footerContainer} ${mystyles.footerdiv} ${mystyles.fullWidth}`}>
-      
-
-      <div className={mystyles.footertextdiv}>
-        
-        {messages.map((message, index) => (<p key={index} className={mystyles.message}>
-          {message}
-        </p>))}
-      </div>
-
-      <div className={mystyles.sendingdiv}>  
-      <Form className={mystyles.form}>
-        <Form.Group className={mystyles.formgroup}>
-          <Form.Control type='text' size='50px' name='message' onChange={handleChange}></Form.Control>
+    <div className={mystyles.chatPage}>
+      <Fade triggerOnce duration={700}>
+        <div className={mystyles.logoWrap}>
+          <img src={`${process.env.PUBLIC_URL}/logo.png`} alt='Logo' className={mystyles.logoImage} />
           
-        </Form.Group>
-        <Button variant="success" onClick={sendMessage}>Send</Button>
-      </Form>
-      
+        </div>
+        
+      </Fade>
 
+      <div className={mystyles.chatCardRow}>
+        
+        <Slide direction='right' triggerOnce duration={700} delay={500} className={mystyles.chatSlide}>
+          <div className={mystyles.chatCard}>
+            <div className={mystyles.footertextdiv}>
+              {messages.map((message, index) => (<p key={index} className={mystyles.message}>
+                {message}
+              </p>))}
+            </div>
+
+            <div className={mystyles.sendingdiv}>  
+              <Form className={mystyles.form} onSubmit={(e) => { e.preventDefault(); sendMessage(); }}>
+                <Form.Group className={mystyles.formgroup}>
+                  <Form.Control type='text' size='50px' name='message' value={formValue.message} onChange={handleChange} placeholder='Write message...' />
+                </Form.Group>
+                <Button variant="success" onClick={sendMessage}>Send</Button>
+              </Form>
+            </div>
+          </div>
+        </Slide>
       </div>
-      
+
+      <div className={mystyles.linkRow}>
+        <Slide direction='left' triggerOnce duration={550} delay={1100}>
+          <a href='#' className={mystyles.footerLink}>information</a>
+        </Slide>
+        <Slide direction='left' triggerOnce duration={550} delay={1200}>
+          <a href='#' className={mystyles.footerLink}>faq</a>
+        </Slide>
+        <Slide direction='right' triggerOnce duration={550} delay={1100}>
+          <a href='#' className={mystyles.footerLink}>discord</a>
+        </Slide>
+        <Slide direction='right' triggerOnce duration={550} delay={1200}>
+          <a href='#' className={mystyles.footerLink}>vote</a>
+        </Slide>
+      </div>
     </div>
   )
 }
