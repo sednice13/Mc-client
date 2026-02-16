@@ -72,6 +72,31 @@ export const AuthProvider = props => {
         }
 
     }
+
+    const register = async (user, password, mail) => {
+        const reqbody = {
+            user,
+            password,
+            mail
+        }
+
+        try {
+            const registerReq = await axios.post(`${AUTH_BASE_URL}/user/register`, JSON.stringify(reqbody), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (registerReq.status === 201) {
+                await login(user, password)
+            }
+
+            return registerReq
+        } catch (error) {
+            throw error
+        }
+    }
+
     const LogOut =  () => {
 
         localStorage.removeItem('token')
@@ -94,7 +119,7 @@ export const AuthProvider = props => {
 
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, login, connectToMinecraft, LogOut}}>
+        <AuthContext.Provider value={{auth, setAuth, login, register, connectToMinecraft, LogOut}}>
             {props.children}
         </AuthContext.Provider>
     )
